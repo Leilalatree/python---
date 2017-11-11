@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*  *通配符选择器 匹配任何元素 */
+        *{
+            margin: 0;
+            background: red;
+        }
+        /*元素选择器 选择相同的元素 对相同的元素设置一种css样式
+        选中页面中所有的此元素*/
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        /* class选择器 给标签设置一个class属性，在写样式时，在class名字前面加个.
+        一般给具有相同属性的元素设置同一个class */
+        .box2{
+            background: green;
+        }
+        /* id选择器 id具有唯一性 在一个页面中，同一个id只能出现一次 在写样式时，在id名字前面加个# */
+        #box{
+            background: blue;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- id > class > tagName(标签名) > * -->
+    <div class="box2">1</div>
+    <div class="box2 box3">2</div>
+    <div id="box" class="box2">3</div>
+</body>
+</html>
