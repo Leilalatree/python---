@@ -21,6 +21,7 @@ GITHUB_LOGIN_HEADERS = {
 
 def login_by_email(email, pwd):
     # http = ProxyManager('https://127.0.0.1:8888')
+    http = urllib3.HTTPSConnectionPool('github.com')
 
     r = http.request('GET', 'https://github.com/login', headers=GITHUB_LOGIN_HEADERS)
     text = r.data.decode('utf-8')
