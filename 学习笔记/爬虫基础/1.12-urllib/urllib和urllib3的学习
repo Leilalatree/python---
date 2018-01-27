@@ -1,0 +1,18 @@
+1.爬虫库的学习
+urllib3 urllib http
+
+2.http包
+包含4个模块，client,server,cookiejar,cookies
+
+3、urllib
+包括5个模块 request,response,error,parse,robotparser
+www.baidu.com/robots.txt
+scrapy默认遵循robots.txt
+ (1) request
+ (2) parse   urlencode,quote,unquote
+
+4、urllib3
+(1)第三方库 使用的http库的client模块
+(2)requests和pip使用的本库
+(3)多次请求通用一个socket 利用http/1.1， connection:keep-aclive，减少了这种握手次数和启动次数
+()
