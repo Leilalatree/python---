@@ -1,0 +1,36 @@
+1.获取参数
+https://login.sina.com.cn/sso/prelogin.php?entry=weibo&callback=sinaSSOController.preloginCallBack&su=MTU5MjEwNTIyNjA%3D&rsakt=mod&checkpin=1&client=ssologin.js(v1.4.19)&_=1518006945562
+
+sinaSSOController.preloginCallBack({"retcode":0,"servertime":1518006944,"pcid":"gz-77cb536505b418b5d46a3c3c442b7beec3a8","nonce":"Z6HY58","pubkey":"EB2A38568661887FA180BDDB5CABD5F21C7BFD59C090CB2D245A87AC25306288272929
+3E5506350508E7F9AA3BB77F4333231490F915F6D63C55FE2F08A49B353F4
+44AD3993CACC02DB784ABBB8E42A9B1BBFFFB38BE18D78E87A0E41B9B8F73A92
+8EE0CCEE1F6739884B9777E4FE9E88A1BBE495927AC4A799B3181D6442443",
+"rsakv":"1330428213",
+"is_openlock":0,
+"lm":1,
+"smsurl":"https:\/\/login.sina.com.cn\/sso\/msglogin?entry=weibo&mobile=15921052260&s=31440d7f2c9e7f45ed34c61f852547a6",
+"showpin":0,"exectime":276})
+
+2.登录URL：https://login.sina.com.cn/sso/login.php?client=ssologin.js(v1.4.19)
+{
+    'entry': 'weibo',
+    'gateway': '1',
+    'from',
+    'savestate': '0',
+    'qrcode_flag': 'false',
+    'useticket': '1',
+    'pagerefer',
+    'vsnf': '1',
+    'su': 'MTU5MjEwNTIyNjA=',
+    'service': 'miniblog',
+    'servertime': '1518006952',
+    'nonce': 'Z6HY58',
+    'pwencode': 'rsa2',
+    'rsakv': '1330428213',
+    'sp': '22014cb53114db1ffa4e77448a3a5755eef289c78dae59bd8b5e07cbe9fdcff8d97ea541e2352714e43d4452a7fbd83eb91744ccb71fa33f945fe059bb705a0f92dce02a3da96b9c473b3f8723b8110bb4c031ed19ae80588e6c3110cbab8cf8407119f78ec841fab065136165ae64f731a1337a2170e261708226c83e706e35',
+    'sr': '1920*1080',
+    'encoding': 'UTF-8',
+    'prelt': '152',
+    'url': 'https://weibo.com/ajaxlogin.php?framelogin=1&callback=parent.sinaSSOController.feedBackUrlCallBack',
+    'returntype': 'META'
+}

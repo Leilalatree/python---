@@ -1,0 +1,65 @@
+1、安装模块
+   
+   
+2、需要下载chromedriver.exe或者phantomjs.exe
+
+
+3、设置userAgent
+
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+caps = DesiredCapabilities.PHANTOMJS
+caps["phantomjs.page.settings.userAgent"] = r'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 ................'
+
+
+4、禁止加载图片
+
+caps["phantomjs.page.settings.loadImages"] = False
+
+
+5、设置使用的driver，即使用的exe是什么
+
+from selenium import webdriver
+driver = webdriver.PhantomJS(executable_path=PATH + r'\resources\phantomjs.exe')
+
+
+6、加载页面
+
+from selenium import webdriver
+driver = webdriver.PhantomJS(executable_path=PATH + r'\resources\phantomjs.exe')
+driver.get('https://www.baidu.com')
+
+
+7、查看urseAgent是什么。。。
+
+print(driver.execute_script("return navigator.userAgent"))
+
+
+8、保存网页截图
+.driver.get_screenshot_as_file('1.png') 
+
+
+9、等待元素执行点击操作，由于网络反应慢或其他原因，html元素可能没有生成，需要一定时间进行等diver加载完成
+
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
+
+wait = WebDriverWait(self.driver, 45)
+elm = wait.until(lambda x: x.find_element_by_xpath('//div'))
+elm.click()
+
+10、css selector选择元素
+
+diver.find_elements("css selector", xpath)   #注意看这个是获取的所有元素，就是相同的xpath路径，返回多个元素
+
+11、xpath选择元素,xpath不会用，可以用Chrome浏览器复制出来
+
+from selenium.webdriver.common.by import By
+elements = driver.find_elements(By.XPATH, '//div')
+
+12、获取元素html
+
+from selenium.webdriver.common.by import By
+elements = driver.find_elements(By.XPATH, '//body')
+elements.get_attribute('innerHTML') 
+ 
