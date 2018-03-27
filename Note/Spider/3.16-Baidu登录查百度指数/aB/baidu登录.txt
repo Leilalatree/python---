@@ -1,0 +1,93 @@
+工具： charles、chrome
+1、抓包，
+1.1 一定要清理缓存，或者使用隐身模式，确保能获取到所有的资源
+1.2 要把所有可能碰到的情况都尝试一边，譬如：账号错误、密码错误、验证码错误、最后再正确登录
+1.3 抓包完成，进行清理干扰包，如果不清楚功能的数据包，不要清理！
+1.4 清理完成的数据包，一定记得保存！
+
+2、定位到关键的提交请求
+2.1 一般是post请求
+2.2 如果是登录的话，是login等path，并且可以查看到 user、password、pwd等参数，
+    如果有验证码的话，可以看到正确的验证码
+2.3 不要每个包都去分析，太浪费时间，都是从核心请求当中扩展
+2.4 百度登录的核心请求是
+https://passport.baidu.com/v2/api/?login
+登录页面，
+需要关注的参数：
+token	0ef59f59ffb10b52845522e53d013ca6
+codestring	jxG2906c1f811cbe23b02df15154301f07e27b09807cc047b78
+u	https://www.baidu.com/?tn=93882546_hao_pg
+gid	C8D3D06-69BE-420F-91A5-E2447FD8645F
+username	15921052260
+password	lap3rX4HQuIR4+b4/XSFTJlSzEI2nTbWsLhHd4n7F0cVhN5C9V4zgjWD5dbXMzRHjlIku+bHGnGD/xuvqKiumo3e+ghu5qDfFcAWFL+LT9WmyYxgdS5JJkXACx68b+Bpev3By6bFIDiS7df3f0fy0Najt2CU3Zs40Km5CsXW78w=
+
+verifycode	女孩
+rsakey	qFPodQM8qch4sosLuYgZ8cSw9BLwnoYh
+ppui_logintime	5279 # 消耗的时间值，单位毫秒，random.randint(6000, 15000)
+fp_uid	a42a0b9b4be227ec851fa777c6a3e40c
+
+fp_info	a42a0b9b4be227ec851fa777c6a3e40c002~~~SASSmDZBDJygBx1_mSSFFZLBcUHB5QiB0Q-ZZLBcUHB5QiB0u-OSkQqISkQqESSqzSS3NZ0MSEv-et5I-A~u-Bx3-t~EIAcrGEvixAUBxAcXPtxXIBcmIOUlxtcFzAcXxB0UIOyEHt~uPtcmPAcyGEJ-esRYhEJ3_HmSX-mSXWmSXxmSq~Z0Ok3vVH8vYfpvDmpJtjpLDg8msTERjw8oiYpRYfpvDxDJyUsMsdpRDhKLtypStyEJsTESqhFMyfFLt9pJs1DmjBFMDUKLkT8RyUsLV~pJIzsLIz2fwJsM7xKLVgA~mgtolI2~m-txXdCZ0RssvDRFMDh85I~pJjN8LIdFJYzKLVgEPljFx1JB~uxt~FIBvFisLmIF~BJtcwwtJmxtc1lt~FxBx1IA0uJFRBJFJFHFxBltRFxtc1ItJmJscDws0sUsL1zORrysRYjp5rGFJVNpMDgKLtw8vyTpStGt0m-txBjF~DRFxq~A0Fzs0UxAcB-B~3-FLmzFJmiBxm-BxExBvFIFx8RBxmPtJmiBvrwsct~BR7fBxXJAL3PBMIfscmxs03zB0UlB0BiBcDRscmPt~ElBx1lBv3xBxuxBR1HsctytL1IAv3it0rRs01-BxDRA0QlFRBxB01zsvBPtmSqVmSqwmSqLmSqUSS1KZB4RQNuzl_BZL8LI9pRVPpQ__SmSqySSXMmSXemSXJmSXGmSXlmSXpZO2cmgt01it0ulA01xA0Eztx1ztu__
+
+dv	tk0.70885717938420161521256766675@vxm0NsvmY~9kt~9krw9kIO9kMw9kQf9k3O9ktlvjYlpk3gvsPy9kti7AYjvktgvHtU9krOvAYjpsMgvHQU9kriv1Yj7sQgvOtl9kvwpP__vm0ZvpHIgvmlIoIi6I32pKOtjKwxYMKpOS~xjLmYUpHqf9kvwpEY~pAYY925hs3SAoIwRvs4RKyhFQypyBy439koypsogvOI~RkMw9kqg8t275w4hs8XlvVxRQu2OQySeQZogpkPypjYOpsLXtm0vspkIO9kvy7AYUvkIy925hs3SAoIwRvs4RK~wVBG4VQVhFQyvgvOI~Rq__~ssLCswz3rNJhwmhvAYj9kMwGmqSugY9HQY7kPwpOty7svfpkrYvsMlpsrlvHI~pOM~pHQwEm0vsvsM~9kIivmYlvsry9kQYpmYl7srY9ktY7kqgvs3jvmYlvsMY9kPjvP__
+traceid	F3036001
+
+2.5 参数中类似 token 这种参数，几乎都是服务器传过来的，直接 在 response 中搜索 token 的值，可以定位到页面
+    1、通过搜索，得到    https://passport.baidu.com/v2/api/
+    https://passport.baidu.com/v2/api/?getapi&tpl=nx&apiver=v3&tt=1521256766477&class=login&gid=C8D3D06-69BE-420F-91A5-E2447FD8645F&logintype=basicLogin&traceid=&callback=bd__cbs__fcfyv1
+    2、分析上面的页面，得到关键字段 gid，去查找gid
+    gid	C8D3D06-69BE-420F-91A5-E2447FD8645F
+    3、通过搜索未找到 gid 的值， 大概判断是 客户端的JS代码生成
+    4、接着搜索 gid 这个key， 可以勾选 whole words only ， 可以定位到JS文件，如果有多个，得一个个去查找
+        https://ss0.bdstatic.com/5LMZfyabBhJ3otebn9fN2DJv/passApi/js/loginv4_f53550e.js
+    5、通过浏览器，清理缓存后，访问到特定登录前的位置（目的就是加载所有的js资源），访问上一步定位的js文件，格式化，
+        搜索 gid， 可以定位到 gid=" + t.guideRandom   ，再次搜索 guideRandom， 定位到
+        this.guideRandom = function() {
+            return "xxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(e) {
+                var t = 16 * Math.random() | 0
+                  , n = "x" == e ? t : 3 & t | 8;
+                return n.toString(16)
+            }).toUpperCase()
+        }(),
+        得到 gid 的算法函数， 转换为 python 函数
+    6、参数 callback 需要分析，在 response body 中搜索 bd__cbs__  或 callback    （意外得到一个 bd__pcbs__ ）
+        得到：e.getUniqueId = function(e) {
+            return e + Math.floor(2147483648 * Math.random()).toString(36)
+        }
+
+2.6 参数中类似 tt	1521256766477 ，基本都是 13位 时间戳，  1521203972 是 10位时间戳
+
+2.7 参数中类似
+tpl	nx
+apiver	v3
+基本都是固定值， 照写 就行！
+
+2.8 https://passport.baidu.com/v2/api/?logincheck&token=73a60c0f542032b6d0ad3a8df9a8f93b&tpl=mn&apiver=v3&tt=1518268258004&sub_source=leadsetpwd&username=mumuloveshine&loginversion=v4&dv=tk0.276407821845840561518268251909%40tto0zyAgPRnmX6D6Z06WtAL~wD6~hvnFhvLTCgBL57GJ~34kDfn1WRngnTvkI~4kqRCot7E~5hFCwv6tADLgopL~w~PyC-FStcB8pfA1DZ4kngATpTA-pp4tEhFWM8D6~vL~hF6teXntwvMLA3PWZVOJ6RAkI-n8pgngMe7k6RnmX6D6Z06WtAL~wD6~hvnFhvLTCgBL57GJ~34k6pAF2RngnTvmpp4tEhFWM8D6~vL~hF6teXntwvMLA3PWZVOJ6RA1qZnmpgngMeho0atAkPT4k2yn-pZ7koR4kozA9pfAk2RngPX4koznkoRCot7E~5hFCwv6tADLgopL~wSOywfBL5CFsw9KJZmMszRngnTvk6pA8pXn1qRn1Wz78X6D6Z06WtAL~wD6~hvnFhvLThVPTATOT5W4kngATp_yrrB~rIOwUvKhIoin8p-4kGf-ozMsRp412TA1DpAgI-nFIfAFIfnk6ynF6X7k2y7k2~nFWp7D__iobK0EfP0nb4-wTMTPUGStYB06UGywc4-X~OSE3BS3UBJD_Fopn12p4mfZn-pXnk6~4kng7mpXngGy4kPy7mpXngGy4kop7FDRAknXwo0vrnmpg78pyn-py7mpTn8pZ78pXnknRnFqZ4kogA8pXAk6RnFDz4ko~n8pX7kGRn1G-4k2znHp-7k6RngqX4kn-A8pgn1PRngnf4kngAp__&traceid=&callback=bd__cbs__je0dkb
+参数中 dv，过于复杂， 不建议大家去破解， 经过测试，可以不提交
+在：
+https://passport.baidu.com/static/passpc-base/dv/f.min.js
+215行
+function m(e) {
+            h && (x = e.token + "@" + Ue(e, e.token),
+            (1 & g.SendMethod) > 0 && l(x))
+        }
+得到: dv
+
+2.9 访问
+https://passport.baidu.com/v2/getpublickey， 没有任何难度
+
+3 在登录 login 页面提交之前，需要获取验证码，并且进行验证
+3.1 https://passport.baidu.com/cgi-bin/genimage?jxG6a07c1661c2ec1bc0212151f4301f77f8edc4307be047e33
+根据之前 得到的  codeString  获取到验证码图片
+3.2 https://passport.baidu.com/v2/?checkvcode&token=e0cd5c5ce584c3cfb3ed0fe24f2e2e1c&tpl=mn&apiver=v3&tt=1521203988536&verifycode=%E6%B0%B4%E7%94%B5%E8%B4%B9&loginversion=v4&codestring=jxG6a07c1661c2ec1bc0212151f4301f77f8edc4307be047e33&traceid=&callback=bd__cbs__oeyd4l
+验证 验证码 输入是否正确
+
+3.3 get提交，参数中有多个重复的值，譬如
+'https://passport.baidu.com/v2/?checkvcode&a=1&a=2&a=3&a=4'
+有多个 a 参数，是没有关系的，服务器会获取到 最后一个参数，进行处理
+即获取 a = 4 ，前面3个值都是无效的！
+
+3.4 一定要避免惯性思维，别想当然。一定要每个参数去 仔细 比对！！
+
+
+
+PS: charles中是ctrl+F ，快捷搜索

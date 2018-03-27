@@ -1,0 +1,110 @@
+1520860456867	geckodriver	INFO	geckodriver 0.19.1
+1520860456881	geckodriver	INFO	Listening on 127.0.0.1:56592
+1520860460886	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.B6xwoeQgDA7c"
+1520860462920	Marionette	INFO	Enabled via --marionette
+1520860465465	Marionette	INFO	Listening on port 56606
+1520860467045	Marionette	WARN	TLS certificate errors will be ignored for this session
+1520861336842	geckodriver	INFO	geckodriver 0.19.1
+1520861336853	geckodriver	INFO	Listening on 127.0.0.1:57977
+1520861340937	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.J2njqjcMcLZm"
+1520861341604	Marionette	INFO	Enabled via --marionette
+1520861343102	Marionette	INFO	Listening on port 57989
+1520861343459	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Child 4548, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 4548, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1520861413593	geckodriver	INFO	geckodriver 0.19.1
+1520861413608	geckodriver	INFO	Listening on 127.0.0.1:58180
+1520861426800	geckodriver	INFO	geckodriver 0.19.1
+1520861426812	geckodriver	INFO	Listening on 127.0.0.1:58204
+1520861430870	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.HsNZsmAESAZW"
+1520861431551	Marionette	INFO	Enabled via --marionette
+1520861433054	Marionette	INFO	Listening on port 58216
+1520861433385	Marionette	WARN	TLS certificate errors will be ignored for this session
+1520862867724	geckodriver	INFO	geckodriver 0.19.1
+1520862867738	geckodriver	INFO	Listening on 127.0.0.1:60471
+1520862871824	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.dotPLzaaMkud"
+1520862872504	Marionette	INFO	Enabled via --marionette
+1520862874044	Marionette	INFO	Listening on port 60479
+1520862874342	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Child 7512, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/com1520863070605	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.1ttRULBT2vNb"
+1520863071314	Marionette	INFO	Enabled via --marionette
+1520863072821	Marionette	INFO	Listening on port 60624
+1520863073118	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Child 14392, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 14392, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 16136, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 16136, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 9484, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 9484, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1520863300005	geckodriver	INFO	geckodriver 0.19.1
+1520863300018	geckodriver	INFO	Listening on 127.0.0.1:61026
+1520863304099	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.O73FEkBLIvJm"
+1520863304803	Marionette	INFO	Enabled via --marionette
+1520863306311	Marionette	INFO	Listening on port 61040
+1520863306622	Marionette	WARN	TLS certificate errors will be ignored for this session
+1520863338416	geckodriver	INFO	geckodriver 0.19.1
+1520863338429	geckodriver	INFO	Listening on 127.0.0.1:61148
+1520863342515	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.uNOtzg16LF9u"
+1520863343228	Marionette	INFO	Enabled via --marionette
+1520863344805	Marionette	INFO	Listening on port 61160
+1520863345069	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 9268, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 14652, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 14652, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[GPU 10392, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1520863580149	geckodriver	INFO	geckodriver 0.19.1
+1520863580164	geckodriver	INFO	Listening on 127.0.0.1:61572
+1520863584225	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.ZAIR5Rp9SEf6"
+1520863584913	Marionette	INFO	Enabled via --marionette
+1520863586410	Marionette	INFO	Listening on port 61586
+1520863586756	Marionette	WARN	TLS certificate errors will be ignored for this session
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+[Child 14944, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1520863599429	geckodriver	INFO	geckodriver 0.19.1
+1520863599442	geckodriver	INFO	Listening on 127.0.0.1:61705
+1520863603491	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.dI9widW0Ol0a"
+1520863604162	Marionette	INFO	Enabled via --marionette
+1520863605664	Marionette	INFO	Listening on port 61721
+1520863606012	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Child 5580, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 5580, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1520863622990	geckodriver	INFO	geckodriver 0.19.1
+1520863623005	geckodriver	INFO	Listening on 127.0.0.1:61808
+1520863627066	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.RSR6kb5tBdj7"
+1520863627712	Marionette	INFO	Enabled via --marionette
+1520863629181	Marionette	INFO	Listening on port 61822
+1520863629580	Marionette	WARN	TLS certificate errors will be ignored for this session
+1520863685667	geckodriver	INFO	geckodriver 0.19.1
+1520863685679	geckodriver	INFO	Listening on 127.0.0.1:61969
+1520863689750	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.96BfeolSICP7"
+1520863690442	Marionette	INFO	Enabled via --marionette
+1520863691960	Marionette	INFO	Listening on port 61983
+1520863692264	Marionette	WARN	TLS certificate errors will be ignored for this session
+1520863703628	geckodriver	INFO	geckodriver 0.19.1
+1520863703640	geckodriver	INFO	Listening on 127.0.0.1:62082
+1520863707723	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.bOVqKOyoKLr2"
+1520863708375	Marionette	INFO	Enabled via --marionette
+1520863709822	Marionette	INFO	Listening on port 62096
+1520863710232	Marionette	WARN	TLS certificate errors will be ignored for this session
+1520863774472	geckodriver	INFO	geckodriver 0.19.1
+1520863774487	geckodriver	INFO	Listening on 127.0.0.1:62260
+1520863778550	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.MZO0wcMLDoo0"
+1520863779225	Marionette	INFO	Enabled via --marionette
+1520863780719	Marionette	INFO	Listening on port 62275
+1520863781065	Marionette	WARN	TLS certificate errors will be ignored for this session
+1520865082469	geckodriver	INFO	geckodriver 0.19.1
+1520865082482	geckodriver	INFO	Listening on 127.0.0.1:63149
+1520865086567	mozrunner::runner	INFO	Running command: "d:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-profile" "C:\\Users\\51508\\AppData\\Local\\Temp\\rust_mozprofile.BOfuIanXFCPc"
+1520865087249	Marionette	INFO	Enabled via --marionette
+1520865088744	Marionette	INFO	Listening on port 63157
+1520865089085	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Child 12436, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
