@@ -1,0 +1,145 @@
+一、需求
+1、根据指定的商品关键字，爬取淘宝的搜索结果，根据销量排序后，
+获取前50页信息
+商品名称、店铺名、价格、商品链接、收货数、发货地
+2、将获取到的信息保存到数据库中
+
+
+二、爬取步骤
+1、抓包
+2、分析 抓包信息
+2.1搜索页面：
+第一页
+https://s.taobao.com/search?initiative_id=tbindexz_20170306&ie=utf8&spm=a21bo.2017.201856-taobao-item.2
+&sourceId=tb.index&search_type=item&ssid=s5-e&commend=all&imgfile=&q=%E8%A1%AC%E8%A1%A3+%E7%94%B7&suggest=history_4
+&_input_charset=utf-8&wq=&suggest_query=&source=suggest&sort=sale-desc
+
+第二页
+https://s.taobao.com/search?initiative_id=tbindexz_20170306&ie=utf8&spm=a21bo.2017.201856-taobao-item.2
+&sourceId=tb.index&search_type=item&ssid=s5-e&commend=all&imgfile=&q=%E8%A1%AC%E8%A1%A3+%E7%94%B7&suggest=history_4
+&_input_charset=utf-8&wq=&suggest_query=&source=suggest&sort=sale-desc&bcoffset=0&p4ppushleft=%2C44&s=44
+
+第三页
+https://s.taobao.com/search?initiative_id=tbindexz_20170306&ie=utf8&spm=a21bo.2017.201856-taobao-item.2
+&sourceId=tb.index&search_type=item&ssid=s5-e&commend=all&imgfile=&q=%E8%A1%AC%E8%A1%A3+%E7%94%B7&suggest=history_4
+&_input_charset=utf-8&wq=&suggest_query=&source=suggest&sort=sale-desc&bcoffset=0&p4ppushleft=%2C44&s=88
+
+https://s.taobao.com/search?sourceId=tb.index&search_type=item&ssid=s5-e&commend=all&imgfile=&q=%E8%A1%AC%E8%A1%A3+%E7%94%B7
+&_input_charset=utf-8&wq=&suggest_query=&source=suggest&sort=sale-desc&bcoffset=0&p4ppushleft=%2C44&s=这里需要拼接
+
+2.2 页数分析，最大100页
+
+2.3 内容分析，在 response 的 g_page_config 中
+
+
+三、实现
+1、建立项目
+2、在pycharm中打开
+3、编写 item
+4、配置 settings
+ROBOTSTXT_OBEY = False
+
+LOG_LEVEL = 'INFO'
+DOWNLOAD_DELAY = 0.1
+
+# 启用缓存
+HTTPCACHE_ENABLED = True
+HTTPCACHE_EXPIRATION_SECS = 0
+HTTPCACHE_DIR = 'httpcache'
+HTTPCACHE_IGNORE_HTTP_CODES = []
+HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+5、编写 spider
+6、配置 settings 中的
+item_pipeline
+
+# 数据库配置
+MONGO_URI = 'mongodb://admin:admin@localhost:27017'
+MONGO_DATABASE = 'scrapy'
+
+7、在mongodb 中创建数据库和集合
+mongo
+use scrapy
+db.createCollection('taobao')
+
+8、编写pipe
+    1、搜索的keywords 进行处理
+测试运行
+
+9、要处理sales和address，增加一个新的 pipe
+
+10、增加middlewares
+    1、代理中间件，抓包没有成功，是因为settings中设置了缓存，引起注意！
+    class ProxyDownloaderMiddleware(object):
+    def __init__(self, proxies):
+        self.proxies = proxies
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(crawler.settings.get('PROXIES'))
+
+    def process_request(self, request, spider):
+        print('ProxyDownloaderMiddleware  request')
+        proxy = self.proxies[0]
+        request.meta['proxy'] = "https://%s" % proxy['ip_port']
+        return None
+
+    def process_response(self, request, response, spider):
+        print('ProxyDownloaderMiddleware response')
+        return response
+
+    2、user-agent
+    class RandomUserAgent(object):
+    def __init__(self, agents):
+        # 使用初始化的agents列表
+        self.agents = agents
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        # 获取settings的USER_AGENT列表并返回
+        return cls(crawler.settings.getlist('USER_AGENTS'))
+
+    def process_request(self, request, spider):
+        print(spider.settings['USER_AGENTS'])
+        # 随机设置Request报头header的User-Agent
+        request.headers.setdefault('User-Agent', random.choice(self.agents))
+
+    注意知识点：
+    1、中间件的流通过程是： speder >> request >>  middle A  >> middle B  >> downloader
+                            downloader >> response >> middle B >> middle A >> spider
+    2、在中间件中，获取settings的配置，有3种方式：
+        1、crawler
+            def __init__(self, agents):
+                # 使用初始化的agents列表
+                self.agents = agents
+
+            @classmethod
+            def from_crawler(cls, crawler):
+                # 获取settings的USER_AGENT列表并返回
+                return cls(crawler.settings.getlist('USER_AGENTS'))
+
+        2、import
+            from taobaoscrapy.settings import USER_AGENTS
+            直接使用 USER_AGENTS
+
+        3、spider
+            spider.settings['USER_AGENTS']
+
+LinkExtractor：
+from scrapy.linkextractors import LinkExtractor
+from scrapy.spiders import CrawlSpider, Rule
+
+class GoogleDirectorySpider(CrawlSpider):
+    name = 'directory.google.com'
+    allowed_domains = ['directory.google.com']
+    start_urls = ['http://directory.google.com/']
+
+    rules = (
+        Rule(LinkExtractor(allow='directory\.google\.com/[A-Z][a-zA-Z_/]+$'),
+            'parse_category', follow=True,
+        ),
+    )
+
+    def parse_category(self, response):
+        # write the category page data extraction code here
+        pass

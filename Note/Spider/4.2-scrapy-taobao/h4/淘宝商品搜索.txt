@@ -1,0 +1,115 @@
+一、需求
+1、访问淘宝首页，搜索 关键字 ，根据 销量 排名，得到商品的列表
+2、获取商品的相关信息：
+价格、收货人数、商品名、商铺名、发货地址、详情链接
+3、将获取到的信息 保存 到 mongodb 中
+
+二、分析
+1、抓包，除非特别简单的，譬如小说网站的爬取，没有post，只有url的get获取，不需要抓包
+    其他的爬虫应用，第一步都是抓包！
+2、分析 包
+    2.1根据url，有我们的搜索关键字，可以尝试，仅通过一个url就直接访问目标页面，测试成功
+    继续分析url：
+    第100页：
+    https://s.taobao.com/search?spm=a230r.1.15.1.5b2045241cb9wP&q=%E5%A5%B3%E8%A3%85+%E8%A3%99
+    &imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&ie=utf8
+    &initiative_id=tbindexz_20170306&sort=sale-desc&bcoffset=0&p4ppushleft=%2C44&s=4356&pb=false
+    第 1 页：
+    https://s.taobao.com/search?spm=a230r.1.15.1.5b2045241cb9wP&q=%E5%A5%B3%E8%A3%85+%E8%A3%99
+    &imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&ie=utf8
+    &initiative_id=tbindexz_20170306&sort=sale-desc&bcoffset=294&p4ppushleft=%2C44&pb=false&s=0&ntoffset=294
+    第 2 页：
+    https://s.taobao.com/search?spm=a230r.1.15.1.5b2045241cb9wP&q=%E5%A5%B3%E8%A3%85+%E8%A3%99
+    &imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&ie=utf8
+    &initiative_id=tbindexz_20170306&sort=sale-desc&bcoffset=0&p4ppushleft=%2C44&pb=false&s=44
+
+    测试第一页的url，修改 bcoffset=0 ,并且去掉后面的 &ntoffset=294 没有影响。
+
+    分析得出，每页显示的 商品 数量是 44， s=0  这个 s 是 其实商品下标
+
+    其实像这种url，大家可以大胆一点，多取掉一些参数
+    https://s.taobao.com/search?q=%E5%A5%B3%E8%A3%85+%E8%A3%99&ie=utf8&sort=sale-desc&p4ppushleft=%2C44&s=0
+    精简为上面这个url，可以正常访问
+    q: 关键字： 空格 变成了 +
+                直接写+： 转变为了 %2B
+
+    s：(页码 - 1) * 44
+
+    2.2 分析内容
+    1、找到 charles 中对应的 response 响应体
+    2、搜索 页面 显示的 我们需要爬取的内容， 一般不要搜索中文，搜索容易区分的一些字母或者数字
+        类似：sea11_1 这样的名字，很容易就可以定位到 内容 的页面
+        定位到 我们的 url 请求的 response 中的 js 代码中 g_page_config 变量 就携带了我们需要的数据
+    3、分析是否所有数据都有：
+        价格：view_price
+        收货人数：view_sales
+        商品名：raw_title
+        商铺名：nick
+        发货地址：item_loc
+        详情链接：detail_url
+
+三、实现
+1、在 cmd 中 执行  scrapy startproject project_name
+2、在 pycharm 中加载 project_name 项目
+3、编写 item
+4、在 spiders 目录下 建立 spider， 最后 return item
+    1、spider 类 必须继承 scrapy.Spider ，并且命名为： ProjectNameSpider
+    2、启动方式有2种：
+        2.1 属性  start_urls = [url1, url2 ...... urln]，
+            scrapy会自动将list中的url进行访问，并且将返回的 response 提交给 parse 方法
+            parse 方法名不能修改！！！！
+        2.2 不写 start_urls， 自己编写 start_requests(self)
+            start_requests 方法名不能修改！！！
+
+5、到 settings 中 修改 pipeline 的配置
+    别忘记修改 ROBOTSTXT_OBEY = False
+    配置 pipeline:
+    ITEM_PIPELINES = {
+       'taobao.pipelines.TaobaoPipeline': 300,
+    }
+
+    配置数据库：
+    MONGO_URI = 'mongodb://admin:admin@localhost:27017'
+    MONGO_DATABASE = 'taobao'
+
+6、到对应的 pipeline 中 进行数据的持久化操作
+    编写玩 pipeline 后，
+    到mongodb 中创建 数据库和集合
+
+    连接mongodb
+    1、cmd中：mongo
+    切换到admin 数据库中
+    2、use admin
+    登录
+    3、db.auth('admin', 'admin')
+    创建 taobao 数据库
+    4、use taobao
+    创建 items 集合
+    5、db.createCollection('items')
+    查看 集合 列表，可以看到 items 这个集合
+    6、show collections
+
+7、编写执行的 run.py
+    一定记住是在根目录，最外层的目录，和scrapy.cfg一个目录下
+
+
+
+
+注意事项：
+1、settings 的 三种 引用方式：
+    1.1、from taobao.settings import KEY_WORDS
+        #导入的方式，获取内容
+        print(KEY_WORDS)
+    1.2 通过 crawler
+        crawler.settings['KEY_WORDS']
+    1.3 通过 spider ，
+        在 spider 类中，通过 self.settings['KEY_WORDS']
+        在 pipe 类中，通过 spider.settings['KEY_WORDS']
+
+2、在for 循环中，获取item，并且提交给 pipeline 进行处理的话，
+    必须是用 yield item ，
+    不能使用 return item，使用return，只会处理list的第一个item
+
+
+3、 scheduler middleware 在scrapy 1.5.0 中， 已经被取消了，现在只有2个中间层：
+    downloader 和 spider
