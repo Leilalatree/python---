@@ -17,3 +17,8 @@ class TencentItem(scrapy.Item):
     workLocation = scrapy.Field()
     publishTime = scrapy.Field()
 
+class PositionItem(scrapy.Item):
+    position_zhize = scrapy.Field()
+
+    position_yaoqiu = scrapy.Field()
+

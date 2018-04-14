@@ -2,7 +2,7 @@
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
-from tenCent.items import TencentItem
+from tenCent.items import TencentItem,PositionItem
 
 class TencentCrawlSpider(CrawlSpider):
     name = 'tencent_crawl'
@@ -10,7 +10,8 @@ class TencentCrawlSpider(CrawlSpider):
     start_urls = ['https://hr.tencent.com/position.php?&start=0#a']
 
     rules = (
-        Rule(LinkExtractor(allow='start=\d+'), callback='parseContent', follow=True),
+        Rule(LinkExtractor(allow=r'start=\d+'), callback='parseContent', follow=True),
+        Rule(LinkExtractor(allow=r'position_detail\.php\?id=\d+'),callback='parsePosition',follow=False)
     )
 
     def parseContent(self, response):
@@ -35,3 +36,12 @@ class TencentCrawlSpider(CrawlSpider):
             yield item
 
 
+    def parsePosition(self,response):
+        item = PositionItem()
+        position_zhize = response.xpath('//ul[@class="squareli"]')[0].xpath('./li/text()').extract()
+        position_yaoqiu = response.xpath('//ul[@class="squareli"]')[1].xpath('./li/text()').extract()
+
+        item['position_zhize'] = position_zhize
+        item['position_yaoqiu'] = position_yaoqiu
+
+        yield item
